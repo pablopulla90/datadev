@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="grid">
+  <article>
+    <h2>Registrar usuario</h2>
+    <form method="post" action="/users/register">
+      <label>Usuario <input name="username" required /></label>
+      <label>Password <input name="password" type="password" required /></label>
+      <label>Rol
+        <select name="role">
+          <option value="analista">Analista</option>
+          <option value="admin">Administrador</option>
+        </select>
+      </label>
+      <button>Crear usuario</button>
+    </form>
+  </article>
+  <article>
+    <h2>Crear proyecto</h2>
+    <form method="post" action="/projects">
+      <label>Nombre <input name="name" required /></label>
+      <label>Descripción <input name="description" /></label>
+      <label>Dueño
+        <select name="owner_id" required>
+          {% for u in users %}
+          <option value="{{ u.id }}">{{ u.username }} ({{ u.role }})</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Política de uso <input name="policy" value="Solo fuentes públicas/autorizadas" /></label>
+      <button>Crear proyecto</button>
+    </form>
+  </article>
+</section>
+
+<section>
+  <h2>Proyectos</h2>
+  <ul>
+    {% for p in projects %}
+    <li><a href="/projects/{{ p.id }}">{{ p.name }}</a> - {{ p.description }}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

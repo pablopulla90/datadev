@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h2>{{ project.name }}</h2>
+  <p>{{ project.description }}</p>
+  <p><strong>Política:</strong> {{ project.policy }}</p>
+</section>
+<section class="grid">
+  <article>
+    <h3>Agregar fuente</h3>
+    <form method="post" action="/sources">
+      <input type="hidden" name="project_id" value="{{ project.id }}" />
+      <label>URL <input name="url" required /></label>
+      <label>Regla CSS <input name="selector_rule" value="body" /></label>
+      <label>Profundidad <input name="crawl_depth" type="number" min="1" value="1" /></label>
+      <label>Dominios permitidos <input name="allowed_domains" /></label>
+      <label>Dominios excluidos <input name="excluded_domains" /></label>
+      <button>Guardar fuente</button>
+    </form>
+  </article>
+  <article>
+    <h3>Fuentes</h3>
+    <ul>
+      {% for s in sources %}
+      <li>
+        {{ s.url }}
+        <form method="post" action="/scrape/{{ s.id }}" style="display:inline">
+          <button>Ejecutar scraping</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+<section>
+  <h3>Historial de ejecuciones</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Fuente</th><th>Estado</th><th>Error</th></tr></thead>
+    <tbody>
+      {% for r in runs %}
+      <tr><td>{{ r.id }}</td><td>{{ r.source_id }}</td><td>{{ r.status }}</td><td>{{ r.error or '-' }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

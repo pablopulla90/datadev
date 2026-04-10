@@ -1,0 +1,11 @@
+body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f9; color: #1c2433; }
+header { background: #1f4e79; color: white; padding: 1rem 2rem; }
+nav a { color: #dceeff; margin-right: 1rem; text-decoration: none; }
+main { padding: 1.5rem 2rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+article, section { background: white; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+label { display: block; margin-bottom: 0.5rem; }
+input, select, button { width: 100%; padding: 0.5rem; margin-top: 0.3rem; }
+button { background: #1f4e79; color: white; border: none; border-radius: 6px; cursor: pointer; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.5rem; border-bottom: 1px solid #ddd; text-align: left; }
