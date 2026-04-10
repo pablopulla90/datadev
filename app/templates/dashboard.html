@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+  <h2>Dashboard</h2>
+  <p>Total de documentos procesados: <strong>{{ total_docs }}</strong></p>
+</section>
+<section class="grid">
+  <article>
+    <h3>Sentimiento</h3>
+    <ul>
+      {% for key, value in sentiments.items() %}
+      <li>{{ key }}: {{ value }}</li>
+      {% endfor %}
+    </ul>
+  </article>
+  <article>
+    <h3>Temas</h3>
+    <ul>
+      {% for key, value in topics.items() %}
+      <li>{{ key }}: {{ value }}</li>
+      {% endfor %}
+    </ul>
+  </article>
+</section>
+<section>
+  <h3>Últimos documentos</h3>
+  <table>
+    <thead>
+      <tr><th>URL</th><th>Idioma</th><th>Sentimiento</th><th>Confianza</th><th>Tema</th></tr>
+    </thead>
+    <tbody>
+      {% for d in recent %}
+      <tr>
+        <td>{{ d.url }}</td>
+        <td>{{ d.language }}</td>
+        <td>{{ d.sentiment_label }} ({{ '%.2f'|format(d.sentiment_score) }})</td>
+        <td>{{ '%.2f'|format(d.confidence) }}</td>
+        <td>{{ d.topic }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
